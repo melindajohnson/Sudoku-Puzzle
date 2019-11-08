@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		1338B9112368F2B9002C88C9 /* Program3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Program3; sourceTree = BUILT_PRODUCTS_DIR; };
 		1338B9142368F2B9002C88C9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1338B91B2368F2D0002C88C9 /* Puzzle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Puzzle.cpp; sourceTree = "<group>"; };
+		1338B91B2368F2D0002C88C9 /* Puzzle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Puzzle.cpp; sourceTree = "<group>"; wrapsLines = 0; };
 		1338B91C2368F2D0002C88C9 /* Puzzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Puzzle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

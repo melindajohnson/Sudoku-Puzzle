@@ -73,6 +73,7 @@ int main(int argc, const char * argv[]) {
    Puzzle p1;
    cout << "Enter input";
    cin >> p1;
+   cout << p1;
    
 
 }
