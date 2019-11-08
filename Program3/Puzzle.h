@@ -47,6 +47,7 @@ public:
    friend std::istream & operator >> (std::istream &in,  Puzzle &p);
    friend std::ostream & operator << (std::ostream &out, const Puzzle &p);
    
+   
 private:
    
    int numberEmpty;

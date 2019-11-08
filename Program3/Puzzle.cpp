@@ -68,27 +68,32 @@ bool Puzzle::set(const int x,const int y,const int value)
 {
    bool checksPassed = true;
    
-   if(value > 0){
-      if(checkRow(x, value) || checkColumn(y, value) || checkBlock(x, y, value))
-         checksPassed = false;
-      
-   }
-   else
-   {
-      numberEmpty++;
-   }
-   if(checksPassed)
-   {
+   if(value==0){
       Sudoku[x][y].setValue(value);
-      validValueCount++;
+      numberEmpty++;
+      Sudoku[x][y].setFlag(false);
       return true;
    }
    else
    {
-      return false;
+         //If any one of the methods return true, then the value cannot be set and checksPassed is set to false
+      if(checkRow(x, value) || checkColumn(y, value) || checkBlock(x, y, value)){
+         checksPassed = false;
+         return false;
+      }
    }
-   
+      //If all  checks are passed, then the value is set to its corresponding square
+   if(checksPassed)
+   {
+      Sudoku[x][y].setValue(value);
+      validValueCount++;
+      Sudoku[x][y].setFlag(true);
+      return true;
+   }
+   return false;
 }
+
+
 
 std::istream& operator>>(std::istream &in,  Puzzle &p)
 {
@@ -100,17 +105,26 @@ std::istream& operator>>(std::istream &in,  Puzzle &p)
              while(!validInput && count<=81){
                in.get(input);
                if(isdigit(input)){
-                  p.set(i,j,input-'0');
-                  p.Sudoku[i][j].setFlag(true);
+                  if(p.set(i,j,input-'0')){
                   count++;
                   validInput=true;
+                  }
+                  else
+                  {
+                     in.clear();
+                     std::cout<<"\nError in input\nSudoku rules broken!! ";
+                     return in;
+                  }
+               }else if(input =='\n'){
+                  in.clear();
+                  std::cout<<"\nError in input\nWhite space should not seperate inputs!! ";
+                  return in;
                }
             }
             validInput=false;
          }
       }
    validInput=true;
-   
    return in;
 }
 
@@ -136,7 +150,7 @@ std::istream& operator>>(std::istream &in,  Puzzle &p)
    //
    //}
 
-bool Puzzle::checkRow(const int x,const int value) const
+bool Puzzle::checkRow(const int x,const int value) const // return true if the same value is found in the same row
 {
    for(int i=0; i<column; i++)
    {
@@ -147,7 +161,7 @@ bool Puzzle::checkRow(const int x,const int value) const
    return false;
 }
 
-bool Puzzle::checkColumn (const int y, const int value) const
+bool Puzzle::checkColumn(const int y, const int value) const // return true if the same value is found in the same column
 {
    for(int i=0; i<row; i++)
    {
@@ -158,7 +172,7 @@ bool Puzzle::checkColumn (const int y, const int value) const
    return false;
 }
 
-bool Puzzle::checkBlock(const int x,const int y,const int value) const
+bool Puzzle::checkBlock(const int x,const int y,const int value) const // return true if the same value is found in the same block
 {
    int blockStartIndexX = x/3 * 3;
    int blockStartIndexY = y/3 * 3;
