@@ -72,10 +72,14 @@ int main(int argc, const char * argv[]) {
    
    Puzzle p1;
    cout << "Enter input";
-   cin >> p1;
-   cout << p1;
+   if(cin >> p1){
+      if(p1.solver(0,0)){
+         cout << p1;
+      }
+   }
    
-
+   
+   
 }
 
 

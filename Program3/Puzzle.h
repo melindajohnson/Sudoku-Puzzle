@@ -43,7 +43,7 @@ public:
    int numEmpty(); //Returns the current number of empty squares (those without any value).
    bool set(const int x,const int y,const int val); //set the value at its corresponding square location
    //It will succeed if the value proposed is legal for that square and will set the value(i.e., does not duplicate a value in the same row, column, or block).
-   bool Solver(int x, int y); //Recursive method that uses backtracking to solve the puzzle
+   bool solver(int x, int y); //Recursive method that uses backtracking to solve the puzzle
    friend std::istream & operator >> (std::istream &in,  Puzzle &p);
    friend std::ostream & operator << (std::ostream &out, const Puzzle &p);
    

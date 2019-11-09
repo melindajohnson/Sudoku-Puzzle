@@ -139,7 +139,7 @@ bool Puzzle::checkRow(const int x, const int value)
     const // return true if the same value is found in the same row
 {
   for (int i = 0; i < column; i++) {
-    if (Sudoku[x][i].getValue() == value) {
+    if (get(x,i) == value) {
       return true;
     }
   }
@@ -150,7 +150,7 @@ bool Puzzle::checkColumn(const int y, const int value)
     const // return true if the same value is found in the same column
 {
   for (int i = 0; i < row; i++) {
-    if (Sudoku[1][y].getValue() == value) {
+    if (get(1,y) == value) {
       return true;
     }
   }
@@ -174,40 +174,46 @@ bool Puzzle::checkBlock(const int x, const int y, const int value)
   return false;
 }
 
-bool Puzzle::Solver(int x, int y) {
-  //   bool solver(int x, int y){
-  //      If x ==9, return true // Base case
-  //      Int emptyX = -1;
-  //      Int emptyY = -1;
-  //      For(starting row index x to ending row index 8){
-  //         For(starting column index y to ending column index 8){
-  //            If(Sudoku[x][y].get() == 0){
-  //               emptyY = j;
-  //               break;
-  //            }
-  //         }
-  //         If(empty != -1)
-  //         emptyX = i ;
-  //         break;
-  //      }
-  //      Foreach values from 1 through 9 – newValue
-  //      If(set(emptyX, emptyY, newValue){
-  //         Int nextX, nextY
-  //         If(emptyX < 8){
-  //            nextY = emptyY    + 1
-  //         }
-  //         else if(emptyY == 8){
-  //            nextX = emptyX + 1
-  //            nextY = 0
-  //         }
-  //         If(Solver(nextX, nextY)){
-  //            Return true
-  //         }
-  //         set(emptyX, emptyY, 0)
-  //      }
-  //         Return false
-  //      }
-  //      }
+bool Puzzle::solver(int x, int y) {
+   bool foundEmptySpot = false;
+   if(x == 9) return true; // Base case
+   int emptyX = -1;
+   int emptyY = -1;
+      for (int i = x; i < row; i++) {
+         for (int j = y; j < column ; j++) {
+            if(get(i,j) == 0){
+             foundEmptySpot = true;
+               emptyY = j;
+               break;
+            }
+         }
+         if(emptyY != -1){
+            emptyX = i ;
+             break;
+         }
+      }
+    if(foundEmptySpot){
+    for (int k = 1; k <= 9; k++){
+       if(set(emptyX, emptyY, k)){
+             int nextX = 0;
+             int nextY = 0;
+           if(emptyX < 8){
+              nextY = emptyY + 1;
+             }
+           else if(emptyY == 8){
+              nextX = emptyX + 1;
+              nextY = 0;
+           }
+           if(solver(nextX, nextY)){
+              return true;
+             }
+          
+        }
+    }
+             set(emptyX, emptyY, 0);
+             return false;
+             
+     }
   return true;
 }
 
