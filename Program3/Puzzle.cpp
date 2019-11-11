@@ -150,7 +150,7 @@ bool Puzzle::checkColumn(const int y, const int value)
     const // return true if the same value is found in the same column
 {
   for (int i = 0; i < row; i++) {
-    if (get(1,y) == value) {
+    if (get(i,y) == value) {
       return true;
     }
   }

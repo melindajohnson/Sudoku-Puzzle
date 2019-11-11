@@ -67,13 +67,17 @@
 #include <iostream>
 #include "Puzzle.h"
 
+using namespace std;
 
 int main(int argc, const char * argv[]) {
    
    Puzzle p1;
    cout << "Enter input";
    if(cin >> p1){
+      cout << "input problem";
+      cout << p1;
       if(p1.solver(0,0)){
+           cout << "output solution";
          cout << p1;
       }
    }
