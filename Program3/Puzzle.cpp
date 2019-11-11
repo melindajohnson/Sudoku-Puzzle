@@ -164,8 +164,8 @@ bool Puzzle::checkBlock(const int x, const int y, const int value)
   int blockStartIndexY = y / 3 * 3;
   int blockEndIndexX = blockStartIndexX + 2;
   int blockEndIndexY = blockStartIndexY + 2;
-  for (int i = blockStartIndexX; i < blockEndIndexX; i++) {
-    for (int j = blockStartIndexY; j < blockEndIndexY; j++) {
+  for (int i = blockStartIndexX; i <= blockEndIndexX; i++) {
+    for (int j = blockStartIndexY; j <= blockEndIndexY; j++) {
       if (Sudoku[i][j].getValue() == value) {
         return true;
       }
@@ -175,6 +175,9 @@ bool Puzzle::checkBlock(const int x, const int y, const int value)
 }
 
 bool Puzzle::solver(int x, int y) {
+//             if(x==1 && y==7){
+//             std::cout<<"error spot";
+//             }
    bool foundEmptySpot = false;
    if(x == 9) return true; // Base case
    int emptyX = -1;
@@ -185,7 +188,10 @@ bool Puzzle::solver(int x, int y) {
              foundEmptySpot = true;
                emptyY = j;
                break;
-            }
+             }else if(j==8){
+             y=0;
+             break;
+             }
          }
          if(emptyY != -1){
             emptyX = i ;
@@ -199,6 +205,7 @@ bool Puzzle::solver(int x, int y) {
              int nextY = 0;
            if(emptyX < 8){
               nextY = emptyY + 1;
+             nextX = emptyX;
              }
            else if(emptyY == 8){
               nextX = emptyX + 1;
@@ -207,13 +214,17 @@ bool Puzzle::solver(int x, int y) {
            if(solver(nextX, nextY)){
               return true;
              }
-          
-        }
-    }
+           else{
              set(emptyX, emptyY, 0);
-             return false;
+           }
+          
+             }
+           
+    }
              
-     }
+             return false;
+    }
+  
   return true;
 }
 
