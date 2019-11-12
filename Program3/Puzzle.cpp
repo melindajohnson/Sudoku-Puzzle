@@ -175,10 +175,10 @@ bool Puzzle::checkBlock(const int x, const int y, const int value)
 }
 
 bool Puzzle::solver(int x, int y) {
-//             if(x==1 && y==7){
-//             std::cout<<"error spot";
-//             }
+             
    bool foundEmptySpot = false;
+   int k=0;
+             
    if(x == 9) return true; // Base case
    int emptyX = -1;
    int emptyY = -1;
@@ -199,18 +199,19 @@ bool Puzzle::solver(int x, int y) {
          }
       }
     if(foundEmptySpot){
-    for (int k = 1; k <= 9; k++){
+    for (k = 1; k <= 9; k++){
        if(set(emptyX, emptyY, k)){
              int nextX = 0;
              int nextY = 0;
-           if(emptyX < 8){
-              nextY = emptyY + 1;
-             nextX = emptyX;
+           if(emptyX < 8 && emptyY != 8){
+                nextY = emptyY + 1;
+                nextX = emptyX;
              }
-           else if(emptyY == 8){
-              nextX = emptyX + 1;
-              nextY = 0;
-           }
+            else if(emptyY == 8){
+                nextX = emptyX + 1;
+                nextY = 0;
+             }
+            
            if(solver(nextX, nextY)){
               return true;
              }
@@ -218,11 +219,9 @@ bool Puzzle::solver(int x, int y) {
              set(emptyX, emptyY, 0);
            }
           
-             }
-           
-    }
-             
-             return false;
+     }
+    }// end of for loop
+     return false;
     }
   
   return true;
