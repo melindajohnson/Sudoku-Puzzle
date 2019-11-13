@@ -72,13 +72,16 @@ using namespace std;
 int main(int argc, const char * argv[]) {
    
    Puzzle p1;
-   cout << "Enter input";
+  // cout << "Enter input";
    if(cin >> p1){
-      cout << "input problem";
+      cout << "\ninput problem\n";
       cout << p1;
       if(p1.solver(0,0)){
-           cout << "output solution";
+           cout << "output solution\n";
          cout << p1;
+      }
+      else{
+         cout << "Sudoku cannot be solved";
       }
    }
    

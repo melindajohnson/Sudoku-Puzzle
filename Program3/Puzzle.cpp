@@ -9,35 +9,64 @@
 #include <cstring>
 #include <iostream>
 
-Puzzle::Square::Square() {
-  value = 0;
-  flag = false;
-}
+/** default constructor */
+Puzzle::Square::Square():value(0),flag(false) {}
 
+/** Destroys the Puzzle object  and frees its assigned memory*/
 Puzzle::Square::~Square() {}
 
+/** Gets the value of the Square object
+ @pre Square obejct is created
+ @post The value of the Square is returned
+ @return The value of the Square   */
 int Puzzle::Square::getValue() const { return value; }
 
+/** Sets the value to the Square object
+ @pre Square obejct is created
+ @post The value is set to the Square object
+ @param newValue The value that is set to the Square object*/
 void Puzzle::Square::setValue(const int &newValue) { value = newValue; }
 
+/** Gets the status of the Flag of the Square object
+ @pre Square obejct is created
+ @post The flag status of the Square is returned
+ @return a boolean which indictates if the value is fixed or variable is returned   */
 bool Puzzle::Square::getFlag() const { return flag; }
 
-void Puzzle::Square::setFlag(
-    const bool &newFlag) // true if value is fixed; false if value is variable;
+/** Sets the status of the Flag of the Square object. Sets true if value is fixed; false if value is variable ie. if value is zero, then flag is set to flase
+ @pre Square obejct is created
+ @post The flag status of the Square is set
+ @param newFlag a boolean which indictates if the value is fixed or variable*/
+void Puzzle::Square::setFlag(const bool &newFlag)
 {
   flag = newFlag;
 }
 
-int Puzzle::get(int x, int y) const // Returns the value at the location (x,y)
+/** Gets the value of the Square object at the location (x,y) of the Puzzle object
+ @pre Puzzle object is created and values are set
+ @post The value of the Square in the particular location of the Puzzle obejct  is returned
+ @param x a integer that corresponds to the row value of the 2d array of Square objects
+ @param y a integer that corresponds to the column value of the 2d array of Square objects
+ @return The value of the Square  at location (x, y) */
+int Puzzle::get(int x, int y) const
 {
 
   return Sudoku[x][y].getValue();
 }
 
+/** The number of variable entries in the puzzle object is returned
+ @pre Puzzle object is created
+ @post The number of variable entries in the  Puzzle obejct  is returned
+ @return The number of variable entries in the  Puzzle obejct  is returned */
 int Puzzle::size() // Returns the number of variable entries in the puzzle.
 {
   return validValueCount;
 }
+
+/** The current number of empty spots in the puzzle object is returned
+ @pre Puzzle object is created and values are set
+ @post The value of the Square in the particular location of the Puzzle obejct  is returned
+ @return The value of the Square  at location (x, y) */
 int Puzzle::numEmpty() // Returns the current number of empty squares (those
                        // without any value).
 {
